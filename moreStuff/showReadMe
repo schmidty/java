@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#
+#
+
+READMEPATH=`find . -name README`
+
+cat $READMEPATH
+

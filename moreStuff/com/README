@@ -1,0 +1,19 @@
+to compile and execute SwingControlDemo.java;
+- javac com/tutorialspoint/gui/SwingControlDemo.java
+- java com.tutorialspoint.gui.SwingControlDemo
+
+
+to compile and execute DbConnection.java;
+- javac -cp .:/usr/share/java/mysql.jar com/database/DbConnection.java
+- java -cp .:/usr/share/java/mysql.jar com.database.DbConnection
+
+
+to compile and execute DbConnectionTest.java;
+- quick: ./dbTest
+- javac -cp .:/usr/share/java/mysql.jar com/database/DbConnectionTest.java
+- java -cp .:/usr/share/java/mysql.jar com.database.DbConnectionTest
+
+Dog class;
+- javac com/tutorialspoint/cli/Dog.java
+- java com.tutorialspoint.cli.Dog
+

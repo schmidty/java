@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#
+#
+
+
+# find database directory and the general user binaries, mysql jar files and java database source scripts
+DB_DIR=`find . -name database -type d`
+USR_BIN=`echo "$PATH" | awk -F: -v OFS="\n" '$1=$1' | grep '\/usr\/bin'`
+MYSQL_JAR=`find /usr -name mysql.jar`
+DB_FILES=`find "$DB_DIR" -name *.java`
+
+# find javac and java commands
+JAVAC=$USR_BIN/javac
+JAVA=$USR_BIN/java
+
+# test javac and java commands
+if  $USR_BIN/test -f $JAVAC ; then
+	echo "Javac command working..." > /dev/null 
+else
+	echo "Javac command didn't work..."
+fi
+
+if  $USR_BIN/test -f $JAVA ; then
+	echo "Java command working..." > /dev/null 
+else
+	echo "Java command didn't work..."
+fi
+
+# get files to be compiled javac compiler
+EXEC_DB_JAVAC="$JAVAC -cp .:$MYSQL_JAR $DB_FILES"
+
+# execute javac compiler command
+#echo $EXEC_DB_JAVAC;
+`$EXEC_DB_JAVAC`
+
+# get database connection test and java command
+FOUND_DB_CONNECTION_TEST=`find "$DB_DIR" -name DbConnectionTest.class | sed -e 's/.class$//g' | sed -e 's/\//\./g' | sed -e 's/\.\.//g' `
+EXEC_DB_JAVA="$JAVA -cp .:$MYSQL_JAR $FOUND_DB_CONNECTION_TEST"
+
+# execute the command
+#echo $EXEC_DB_JAVA;
+$EXEC_DB_JAVA
+
